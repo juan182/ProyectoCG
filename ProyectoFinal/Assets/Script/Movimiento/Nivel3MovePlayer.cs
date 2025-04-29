@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
+    private CharacterController conn;
+
     //Movimiento
     float speed = 5;
     float horizontal;
@@ -16,10 +18,16 @@ public class MovePlayer : MonoBehaviour
     Quaternion toRotate;
     float magnitud;
 
+    //Salto
+    float jumpSpeed = 10;
+    float ySpeed;
+    Vector3 vel;
+    public bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        conn = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -36,7 +44,25 @@ public class MovePlayer : MonoBehaviour
         magnitud = moveDirection.magnitude;
         magnitud = Mathf.Clamp01(magnitud);
 
-        transform.Translate(moveDirection * speed*Time.deltaTime, Space.World);
+        conn.SimpleMove(moveDirection * magnitud * speed);
+
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+        
+        vel = moveDirection * magnitud;
+        vel.y = ySpeed;
+
+        conn.Move(vel * Time.deltaTime);
+
+        if (conn.isGrounded)
+        {
+            ySpeed = -0.5f;
+            isGrounded = true;
+            if (Input.GetButtonDown("Jump"))
+            {
+                ySpeed = jumpSpeed;
+                isGrounded = false;
+            }
+        }
 
         if(moveDirection != Vector3.zero)
         {
