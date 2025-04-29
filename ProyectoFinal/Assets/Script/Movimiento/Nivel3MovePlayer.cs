@@ -12,7 +12,7 @@ public class MovePlayer : MonoBehaviour
 
     //Rotacion
     Vector3 moveDirection;
-    float rotationSpeed = 5;
+    float rotationSpeed = 360;
     Quaternion toRotate;
     float magnitud;
 
@@ -36,7 +36,7 @@ public class MovePlayer : MonoBehaviour
         magnitud = moveDirection.magnitude;
         magnitud = Mathf.Clamp01(magnitud);
 
-        transform.Translate(moveDirection * speed*Time.deltaTime);
+        transform.Translate(moveDirection * speed*Time.deltaTime, Space.World);
 
         if(moveDirection != Vector3.zero)
         {
