@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class MovePlayer : MonoBehaviour
+public class Nivel3MovePlayer : MonoBehaviour
 {
     private CharacterController conn;
+
+    //Vida
+    public int health = 5;
 
     //Movimiento
     float speed = 5;
@@ -18,6 +21,9 @@ public class MovePlayer : MonoBehaviour
     Quaternion toRotate;
     float magnitud;
 
+    //Posicion
+    private Vector3 initialPosition;
+
     //Salto
     float jumpSpeed = 10;
     float ySpeed;
@@ -27,7 +33,11 @@ public class MovePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Componente
         conn = GetComponent<CharacterController>();
+
+        //Registra posicion de inicio
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -68,6 +78,42 @@ public class MovePlayer : MonoBehaviour
         {
             toRotate = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    public void ResetPlayerPosition()
+    {
+        transform.position = initialPosition;
+    }
+    public float threshold;
+
+    public void hit()
+    {
+        health = health - 1;
+        ResetPlayerPosition();
+
+        if (health <= 0)
+        {
+            ResetPlayerPosition();
+            health = 5;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Enemigo
+        if (collision.gameObject.CompareTag("Enemie"))
+        {
+            // Lógica para manejar la colisión
+
+            hit();
+        }
+        //Trampa
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            hit();
+            // Lógica para manejar la colisión
+            //ResetPlayerPosition();
         }
     }
 }
