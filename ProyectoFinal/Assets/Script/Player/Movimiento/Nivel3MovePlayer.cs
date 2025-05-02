@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Nivel3MovePlayer : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Nivel3MovePlayer : MonoBehaviour
 
         //Registra posicion de inicio
         initialPosition = transform.position;
+        Debug.Log("Posición inicial registrada: " + initialPosition);
     }
 
     // Update is called once per frame
@@ -45,9 +47,9 @@ public class Nivel3MovePlayer : MonoBehaviour
     {
         //Toma el valor de Horizontal
         horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        vertical = Input.GetAxisRaw("Vertical")*-1;
 
-        moveDirection = new Vector3(horizontal, 0, vertical);
+        moveDirection = new Vector3(vertical, 0, horizontal);
         moveDirection.Normalize();
 
         //Magnitud
@@ -79,6 +81,12 @@ public class Nivel3MovePlayer : MonoBehaviour
             toRotate = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
         }
+
+        //Caida
+        if (transform.position.y < -0.5f)
+        {
+            ResetPlayerPosition();
+        }
     }
 
     public void ResetPlayerPosition()
@@ -90,7 +98,6 @@ public class Nivel3MovePlayer : MonoBehaviour
     public void hit()
     {
         health = health - 1;
-        ResetPlayerPosition();
 
         if (health <= 0)
         {
@@ -99,7 +106,7 @@ public class Nivel3MovePlayer : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnControllerColliderHit(ControllerColliderHit collision)
     {
         //Enemigo
         if (collision.gameObject.CompareTag("Enemie"))

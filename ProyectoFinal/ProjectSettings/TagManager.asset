@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemie
   - Trap
+  - RotatingPlatform
   layers:
   - Default
   - TransparentFX
