@@ -8,7 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Reeds_01
-  m_Shader: {fileID: -6465566751694194690, guid: 3230f6c5d09dd114c82b2287fcc7e15b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3230f6c5d09dd114c82b2287fcc7e15b,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _COLOR_OVERLAY_UV
@@ -26,6 +29,7 @@ Material:
     RenderType: TransparentCutout
   disabledShaderPasses:
   - SHADOWCASTER
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -115,7 +119,7 @@ Material:
     - _BOOLEAN_1: 0
     - _Bend: 0
     - _Bend_Range: 1
-    - _Bend_Strength: 0.7
+    - _Bend_Strength: 0.245
     - _BillboardKwToggle: 0
     - _BillboardShadowFade: 0.5
     - _Blend: 0
@@ -172,7 +176,7 @@ Material:
     - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Start_Bend_Range: 0.4
+    - _Start_Bend_Range: 0.508
     - _Start_To_Bend_Range: 1
     - _Start_to_bend_range: 1
     - _SubsurfaceIndirect: 0.25
