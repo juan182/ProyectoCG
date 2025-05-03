@@ -261,12 +261,12 @@ PrefabInstance:
     - target: {fileID: 736482141215372739, guid: 94c015d94f6e5364e9b36b960bbe1b77,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0368042
+      value: -130.7
       objectReference: {fileID: 0}
     - target: {fileID: 736482141215372739, guid: 94c015d94f6e5364e9b36b960bbe1b77,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.800003
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 736482141215372739, guid: 94c015d94f6e5364e9b36b960bbe1b77,
         type: 3}
@@ -316,6 +316,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1961365880}
+    - targetCorrespondingSourceObject: {fileID: 104517609856167801, guid: 94c015d94f6e5364e9b36b960bbe1b77,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1961365881}
   m_SourcePrefab: {fileID: 100100000, guid: 94c015d94f6e5364e9b36b960bbe1b77, type: 3}
 --- !u!1 &141213926
 GameObject:
@@ -1117,6 +1121,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.77062666, y: 0.30905968, z: 0.07221814}
   m_Center: {x: 0.0056705624, y: -0.022156887, z: 0}
+--- !u!114 &1961365881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961365875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391239e1d48a377478b56b24d35016ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidadNadar: 1.5
+  velocidadAtaque: 5
+  distanciaDeteccion: 5
+  tiempoEspera: 3
+  ultimoAtaque: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
