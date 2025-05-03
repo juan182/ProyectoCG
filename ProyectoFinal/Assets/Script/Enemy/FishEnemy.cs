@@ -5,11 +5,11 @@ using UnityEngine;
 public class FishEnemy : MonoBehaviour
 {
 
-    public float velocidadNadar = 1.5f;
+    public float velocidadNadar = 2.5f;
     public float velocidadAtaque = 5f;
-    public float distanciaDeteccion = 5f;
-    public float tiempoEspera = 3f;
-    public float ultimoAtaque = 0f;
+    public float distanciaDeteccion = 20f;
+    public float tiempoEspera = 4f;
+    private float tiempoProximoAtaque = 0f;
 
     private Vector3 objPatrulla;
     private bool ataque = false;
@@ -27,7 +27,7 @@ public class FishEnemy : MonoBehaviour
     {
         float distancia = Vector3.Distance(transform.position, canoa.position);
 
-        if (distancia <= distanciaDeteccion && Time.time > ultimoAtaque)
+        if (distancia <= distanciaDeteccion && Time.time > tiempoProximoAtaque)
         {
             ataque = true;
         }
@@ -38,12 +38,17 @@ public class FishEnemy : MonoBehaviour
         else
         {
             //Patrulla
-            transform.position = Vector3.MoveTowards(transform.position, objPatrulla, velocidadAtaque * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, objPatrulla, velocidadNadar * Time.deltaTime);
             if(Vector3.Distance(transform.position, objPatrulla) < 0.5f)
             {
                 NuevoDestino();
             }
         }
+
+        Vector3 pos = transform.position;
+        pos.y = Mathf.Clamp(pos.y, 68.2f, 70.1f); // ajusta los valores según tu agua
+        transform.position = pos;
+
     }
 
     void NuevoDestino()
@@ -64,11 +69,17 @@ public class FishEnemy : MonoBehaviour
             Rigidbody rb = other.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddTorque(Vector3.up * 5f, ForceMode.Impulse);
+                rb.AddTorque(Vector3.up * 0.01f, ForceMode.Impulse);
+            }
+
+            BoatHealth salud = other.GetComponent<BoatHealth>();
+            if (salud != null)
+            {
+                salud.RecibirDaño(10f); // Puedes ajustar la cantidad de daño
             }
 
             ataque = false;
-            ultimoAtaque = Time.time + tiempoEspera;
+            tiempoProximoAtaque = Time.time + tiempoEspera;
 
             // Reposicionar pez para evitar spam de choques
             NuevoDestino();
