@@ -19,7 +19,7 @@ public class RestartNivel2 : MonoBehaviour
 
     private System.Collections.IEnumerator Reiniciar()
     {
-        yield return new WaitForSeconds(2f); // Espera 2 segundos
+        yield return new WaitForSeconds(1.5f); // Espera 1.5 segundos
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

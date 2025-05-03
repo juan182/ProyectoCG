@@ -343,6 +343,10 @@ GameObject:
   - component: {fileID: 432104}
   - component: {fileID: 20536702}
   - component: {fileID: 6441594}
+  - component: {fileID: 4591431120967270168}
+  - component: {fileID: 4985961052913132101}
+  - component: {fileID: 7466188857260584521}
+  - component: {fileID: 4173428259880125305}
   m_Layer: 0
   m_Name: Indian kanoe A Body
   m_TagString: Untagged
@@ -420,9 +424,82 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8dd89456558795c47a9f9c9d63919b1a, type: 3}
+--- !u!54 &4591431120967270168
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  serializedVersion: 4
+  m_Mass: 50
+  m_Drag: 1.5
+  m_AngularDrag: 1
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4985961052913132101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1414d4f64c316042b054bad7efd3131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alturaAgua: 70.1
+  alturaMaxInmersion: 0.5
+  flotacion: 10
+--- !u!114 &7466188857260584521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ea582011265b4bb56365c4c83dbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 1000
+  giroVelocidad: 45
+--- !u!114 &4173428259880125305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a00f7d451334b43a8108afccd519ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saludMaxima: 100
+  saludActual: 0
+  velocidadHundimiento: 0.1
+  tiempoGO: 3
+  tiempoInclinado: 0
 --- !u!1 &188362
 GameObject:
   m_ObjectHideFlags: 0

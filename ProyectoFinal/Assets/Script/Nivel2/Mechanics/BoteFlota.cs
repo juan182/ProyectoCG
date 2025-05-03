@@ -23,7 +23,7 @@ public class BoteFlota : MonoBehaviour
         if (profundidad > 0)
         {
             float desplazamiento = Mathf.Clamp01(profundidad / alturaMaxInmersion);
-            float fuerza = Mathf.Abs(Physics.gravity.y) * desplazamiento * flotacion;
+            float fuerza = Mathf.Lerp(0, Mathf.Abs(Physics.gravity.y) * desplazamiento * flotacion, desplazamiento);
             rb.AddForce(Vector3.up * fuerza, ForceMode.Acceleration);
         }
     }

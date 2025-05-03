@@ -12,6 +12,8 @@ public class BoatHealth : MonoBehaviour
     private bool hundiendose = false;
     private float profundidadMaxima = 66.4f;
 
+    public float tiempoGO = 3f;
+    public float tiempoInclinado = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,26 +39,41 @@ public class BoatHealth : MonoBehaviour
         float inclinacion = Vector3.Angle(transform.up, Vector3.up);
         if (inclinacion > 45f)
         {
-            Debug.Log("Canoa se volcó. Game Over.");
-            StartCoroutine(ReiniciarEscena(3f));
+            tiempoInclinado += Time.deltaTime;
+
+            if (tiempoInclinado >= tiempoGO)
+            {
+                Debug.Log("Canoa se volcó. Game Over.");
+                StartCoroutine(ReiniciarEscena(1.5f));
+            }
+            else
+            {
+                tiempoInclinado = 0f;
+            }
+            
         }
     }
 
     public void RecibirDaño(float cantidad)
     {
+
+        Debug.Log("Entró al método RecibirDaño");
         saludActual -= cantidad;
         Debug.Log("Canoa recibió daño. Salud actual: " + saludActual);
 
         if (saludActual <= 50f && !hundiendose)
         {
             hundiendose = true;
+            Debug.Log("Entró en modo hundiéndose");
         }
 
         if (saludActual <= 0f)
         {
             saludActual = 0f;
-            StartCoroutine(ReiniciarEscena(3f)); // espera 3 segundos antes de reiniciar
+            Debug.Log("Salud llego a 0, reiniciando escena en 1,5 segundos");
+            StartCoroutine(ReiniciarEscena(1.5f)); // espera 3 segundos antes de reiniciar
         }
+        
     }
 
     public void IniciarReinicio(float delay)

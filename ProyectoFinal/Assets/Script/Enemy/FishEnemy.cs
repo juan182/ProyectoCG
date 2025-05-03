@@ -5,10 +5,10 @@ using UnityEngine;
 public class FishEnemy : MonoBehaviour
 {
 
-    public float velocidadNadar = 2.5f;
-    public float velocidadAtaque = 5f;
-    public float distanciaDeteccion = 20f;
-    public float tiempoEspera = 4f;
+    public float velocidadNadar = 10f;
+    public float velocidadAtaque = 8f;
+    public float distanciaDeteccion = 25f;
+    public float tiempoEspera = 7f;
     private float tiempoProximoAtaque = 0f;
 
     private Vector3 objPatrulla;
@@ -46,7 +46,7 @@ public class FishEnemy : MonoBehaviour
         }
 
         Vector3 pos = transform.position;
-        pos.y = Mathf.Clamp(pos.y, 68.2f, 70.1f); // ajusta los valores según tu agua
+        pos.y = Mathf.Clamp(pos.y, 68.2f, 70.0f); // ajusta los valores según tu agua
         transform.position = pos;
 
     }
@@ -65,18 +65,30 @@ public class FishEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
+            GameObject canoa = GameObject.FindGameObjectWithTag("Player");
+            if (canoa != null)
+            {
+                BoatHealth salud = other.GetComponentInParent<BoatHealth>();
+                if (salud != null)
+                {
+                    salud.RecibirDaño(5f); // Puedes ajustar la cantidad de daño
+                    Debug.Log("Canoa recibió daño");
+                }
+                else
+                {
+                    Debug.LogWarning("No se encontró BoatHealth en el objeto o sus padres: " + other.name);
+                }
+            }
+
             // Aplicar una leve rotación a la canoa
-            Rigidbody rb = other.GetComponent<Rigidbody>();
+            Rigidbody rb = other.GetComponentInParent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddTorque(Vector3.up * 0.01f, ForceMode.Impulse);
             }
 
-            BoatHealth salud = other.GetComponent<BoatHealth>();
-            if (salud != null)
-            {
-                salud.RecibirDaño(10f); // Puedes ajustar la cantidad de daño
-            }
+            
 
             ataque = false;
             tiempoProximoAtaque = Time.time + tiempoEspera;
