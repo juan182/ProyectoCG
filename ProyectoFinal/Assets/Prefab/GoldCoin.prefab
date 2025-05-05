@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8928312911044913412
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_Name
+      value: GoldCoin
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 187.05998
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 187.05998
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 187.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5305991
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.3448486
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.6324348
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b11eb066cecfd0641b8ac4c8d4c2c510, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 05b32c2abbc39a143a57f21c3a956882,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5206469192271163044}
+  m_SourcePrefab: {fileID: 100100000, guid: 05b32c2abbc39a143a57f21c3a956882, type: 3}
+--- !u!1 &8928312911044816806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 05b32c2abbc39a143a57f21c3a956882,
+    type: 3}
+  m_PrefabInstance: {fileID: 8928312911044913412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5206469192271163044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928312911044816806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ced05f01626f1146a9c7bb0f7e6df0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidadRotacion: 50
+  ejeRotacion: {x: 1, y: 0, z: 0}
