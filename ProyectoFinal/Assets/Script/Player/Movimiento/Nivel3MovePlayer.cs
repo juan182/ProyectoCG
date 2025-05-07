@@ -75,10 +75,12 @@ public class Nivel3MovePlayer : MonoBehaviour
         {
             ySpeed = -0.5f;
             isGrounded = true;
+            anim.SetBool("IsJumping", false);
             if (Input.GetButtonDown("Jump"))
             {
                 ySpeed = jumpSpeed;
                 isGrounded = false;
+                anim.SetBool("IsJumping", true);
             }
         }
 
