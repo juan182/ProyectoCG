@@ -4,86 +4,95 @@ using UnityEngine;
 
 public class FishEnemy : MonoBehaviour
 {
+    public float velocidadNadar = 5f;
+    public float velocidadAtaque = 8f;
+    public float distanciaDeteccion = 25f;
+    public float tiempoEspera = 2f;
+    public float alturaEmerger = 5f;
 
-    public float velocidadNadar = 2.5f;
-    public float velocidadAtaque = 5f;
-    public float distanciaDeteccion = 20f;
-    public float tiempoEspera = 4f;
-    private float tiempoProximoAtaque = 0f;
-
-    private Vector3 objPatrulla;
-    private bool ataque = false;
+    public Escape escape;
     private Transform canoa;
 
-    // Start is called before the first frame update
-    void Start()
+    public Transform[] puntosPatrulla;
+    private int indiceActual;
+
+    private bool atacando = false;
+    private bool regresando = false;
+    private float tiempoProximoAtaque = 0f;
+
+    private Vector3 posicionInicioAtaque;
+
+    private void Start()
     {
         canoa = GameObject.FindGameObjectWithTag("Player").transform;
         NuevoDestino();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float distancia = Vector3.Distance(transform.position, canoa.position);
 
-        if (distancia <= distanciaDeteccion && Time.time > tiempoProximoAtaque)
+        if (!atacando && !regresando && distancia <= distanciaDeteccion && Time.time > tiempoProximoAtaque)
         {
-            ataque = true;
+            atacando = true;
+            posicionInicioAtaque = transform.position;
+
+            // Hacer que sobresalga del agua (opcional)
+            transform.position += new Vector3(0, alturaEmerger, 0);
         }
-        if (ataque)
+
+        if (atacando)
         {
             transform.position = Vector3.MoveTowards(transform.position, canoa.position, velocidadAtaque * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, canoa.position) < 1f)
+            {
+                atacando = false;
+                regresando = true;
+                tiempoProximoAtaque = Time.time + tiempoEspera;
+                canoa.GetComponent<BoatMovement>().ActivarMovimiento(false);
+                escape.InicioEscape();
+            }
+        }
+        else if (regresando)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, posicionInicioAtaque, velocidadNadar * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, posicionInicioAtaque) < 0.1f)
+            {
+                regresando = false;
+            }
         }
         else
         {
-            //Patrulla
-            transform.position = Vector3.MoveTowards(transform.position, objPatrulla, velocidadNadar * Time.deltaTime);
-            if(Vector3.Distance(transform.position, objPatrulla) < 0.5f)
-            {
-                NuevoDestino();
-            }
+            Patrullar();
+        }
+    }
+
+    private void Patrullar()
+    {
+        if (puntosPatrulla.Length == 0)
+        {
+            Debug.LogWarning("No hay puntos de patrulla asignados.");
+            return;
         }
 
-        Vector3 pos = transform.position;
-        pos.y = Mathf.Clamp(pos.y, 68.2f, 70.1f); // ajusta los valores según tu agua
-        transform.position = pos;
+        Debug.Log("Patrullando hacia: " + puntosPatrulla[indiceActual].name);
 
-    }
+        Transform destino = puntosPatrulla[indiceActual];
+        transform.position = Vector3.MoveTowards(transform.position, destino.position, velocidadNadar * Time.deltaTime);
 
-    void NuevoDestino()
-    {
-        float rango = 10f;
-        objPatrulla = new Vector3(
-            transform.position.x + Random.Range(-rango, rango),
-            transform.position.y + Random.Range(-1f, 1f),
-            transform.position.z + Random.Range(-rango, rango)
-        );
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (Vector3.Distance(transform.position, destino.position) < 0.1f)
         {
-            // Aplicar una leve rotación a la canoa
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddTorque(Vector3.up * 0.01f, ForceMode.Impulse);
-            }
-
-            BoatHealth salud = other.GetComponent<BoatHealth>();
-            if (salud != null)
-            {
-                salud.RecibirDaño(10f); // Puedes ajustar la cantidad de daño
-            }
-
-            ataque = false;
-            tiempoProximoAtaque = Time.time + tiempoEspera;
-
-            // Reposicionar pez para evitar spam de choques
             NuevoDestino();
         }
+    }
+
+
+    private void NuevoDestino()
+    {
+        if (puntosPatrulla.Length == 0) return;
+        indiceActual = Random.Range(0, puntosPatrulla.Length);
     }
 
 }

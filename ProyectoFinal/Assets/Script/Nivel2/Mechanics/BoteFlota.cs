@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BoteFlota : MonoBehaviour
 {
-    public float alturaAgua = 70.1f; // Nivel del agua
+    public float alturaAgua = 70.2f; // Nivel del agua
     public float alturaMaxInmersion = 0.5f; // Hasta qué punto el bote puede sumergirse antes de aplicar flotación total
-    public float flotacion = 10f; // Qué tan fuerte es la fuerza de flotación
+    public float flotacion = 15f; // Qué tan fuerte es la fuerza de flotación
 
     private Rigidbody rb;
 
@@ -23,7 +23,7 @@ public class BoteFlota : MonoBehaviour
         if (profundidad > 0)
         {
             float desplazamiento = Mathf.Clamp01(profundidad / alturaMaxInmersion);
-            float fuerza = Mathf.Abs(Physics.gravity.y) * desplazamiento * flotacion;
+            float fuerza = Mathf.Abs(Physics.gravity.y) * desplazamiento * desplazamiento * flotacion;
             rb.AddForce(Vector3.up * fuerza, ForceMode.Acceleration);
         }
     }

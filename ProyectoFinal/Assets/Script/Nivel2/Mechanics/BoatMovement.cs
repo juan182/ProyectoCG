@@ -7,12 +7,15 @@ public class BoatMovement : MonoBehaviour
     public float velocidad = 600f;
     public float giroVelocidad = 50f;
     private Rigidbody rb;
+    private bool puedeMoverse = true;
 
+    private RigidbodyConstraints restriccionesOriginales;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0, -0.5f, 0); // más estable
+        rb.centerOfMass = new Vector3(0, -0.5f, 0);
+        restriccionesOriginales = rb.constraints;
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class BoatMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!puedeMoverse) return;
+
         // Leer la entrada de movimiento (adelante/atrás) y giro (izquierda/derecha)
         float adelante = Input.GetAxis("Vertical");
         float giro = Input.GetAxis("Horizontal");
@@ -41,5 +46,21 @@ public class BoatMovement : MonoBehaviour
 
         
         rb.MoveRotation(rb.rotation * rotacion);
+    }
+
+    public void ActivarMovimiento(bool activar)
+    {
+        puedeMoverse = activar;
+    }
+
+    public void CongelarInclinacion()
+    {
+        rb.constraints = (restriccionesOriginales | RigidbodyConstraints.FreezeRotationZ |
+            RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY);
+    }
+
+    public void RestaurarInclinacion()
+    {
+        rb.constraints = restriccionesOriginales;
     }
 }
