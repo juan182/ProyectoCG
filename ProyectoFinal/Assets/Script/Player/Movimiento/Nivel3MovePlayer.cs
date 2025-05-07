@@ -22,6 +22,9 @@ public class Nivel3MovePlayer : MonoBehaviour
     Quaternion toRotate;
     float magnitud;
 
+    //Animacion
+    private Animator anim;
+
     //Posicion
     private Vector3 initialPosition;
 
@@ -36,6 +39,7 @@ public class Nivel3MovePlayer : MonoBehaviour
     {
         //Componente
         conn = GetComponent<CharacterController>();
+        anim = transform.GetChild(0).GetComponent<Animator>();
 
         //Registra posicion de inicio
         initialPosition = transform.position;
@@ -55,6 +59,8 @@ public class Nivel3MovePlayer : MonoBehaviour
         //Magnitud
         magnitud = moveDirection.magnitude;
         magnitud = Mathf.Clamp01(magnitud);
+        anim.SetFloat("Speed", magnitud);
+        Debug.Log("Speed: " + magnitud);
 
         conn.SimpleMove(moveDirection * magnitud * speed);
 
