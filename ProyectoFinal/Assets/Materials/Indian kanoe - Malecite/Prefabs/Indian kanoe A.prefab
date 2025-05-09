@@ -345,6 +345,8 @@ GameObject:
   - component: {fileID: 6441594}
   - component: {fileID: 4591431120967270168}
   - component: {fileID: 4985961052913132101}
+  - component: {fileID: 4521568941184445454}
+  - component: {fileID: 4627542562556107555}
   - component: {fileID: 7466188857260584521}
   m_Layer: 0
   m_Name: Indian kanoe A Body
@@ -467,7 +469,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alturaAgua: 70.1
   alturaMaxInmersion: 0.5
-  flotacion: 10
+  flotacion: 15
+--- !u!65 &4521568941184445454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0224304, y: 0.8158493, z: 4.8960266}
+  m_Center: {x: 0.001991272, y: 0.37120724, z: -0.008712769}
+--- !u!114 &4627542562556107555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b51d42ccd930e448013b053fae5335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulsaciones: 5
+  tiempoMaxEscape: 3
 --- !u!114 &7466188857260584521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,8 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7ea582011265b4bb56365c4c83dbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 1000
-  giroVelocidad: 45
+  velocidad: 700
+  giroVelocidad: 50
 --- !u!1 &188362
 GameObject:
   m_ObjectHideFlags: 0

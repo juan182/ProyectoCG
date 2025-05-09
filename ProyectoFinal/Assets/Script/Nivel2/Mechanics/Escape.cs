@@ -5,30 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class Escape : MonoBehaviour
 {
-    public float pulsaciones=5f;
+    public float pulsaciones = 5f;
     private bool escapando = false;
-    private float contadorPulsaciones = 0f;
+    private int contadorPulsaciones = 0;
 
     public float tiempoMaxEscape = 3f;
     private float temporizador = 0f;
 
     private BoatMovement boatMove;
     private BoteFlota boteFlota;
-    private ReinicioEscena reinicioEscena;
 
-    public void InicioEscape()
+    GameController gameController;
+
+    void Awake()
     {
-            
-            escapando = true;
-            contadorPulsaciones = 0f;
-            temporizador = 0f;
-            
-        // Desactivar movimiento y flotación
-            if (boatMove != null) boatMove.ActivarMovimiento(false);
-            boatMove.CongelarInclinacion();
+        gameController = FindObjectOfType<GameController>();
     }
-
-    
 
 
     // Start is called before the first frame update
@@ -36,13 +28,12 @@ public class Escape : MonoBehaviour
     {
         boatMove = GetComponent<BoatMovement>();
         boteFlota = GetComponent<BoteFlota>();
-        reinicioEscena = GetComponent<ReinicioEscena>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (!escapando) return;
 
         temporizador += Time.deltaTime;
@@ -51,25 +42,41 @@ public class Escape : MonoBehaviour
         {
             contadorPulsaciones++;
             Debug.Log("SPACE detectado, contador = " + contadorPulsaciones);
-            
+            gameController.Contador(contadorPulsaciones);
         }
 
         if (contadorPulsaciones >= pulsaciones)
         {
-            TerminarEscape();
+            gameController.TerminarEscape(true);
             return;
         }
 
         if (temporizador >= tiempoMaxEscape)
         {
-            TerminarEscape();
+            gameController.TerminarEscape(false);
             Perdiste();
         }
     }
-    private void TerminarEscape()
+
+    public bool EstaEscapando()
+    {
+        return escapando;
+    }
+
+    public void InicioEscape()
+    {
+        escapando = true;
+        contadorPulsaciones = 0;
+        temporizador = 0f;
+        boatMove.CongelarInclinacion();
+        Debug.Log("Minijuego iniciado desde escape");
+        gameController.PanelDeEscape();
+        gameController.Contador(0);
+    }
+
+    public void TerminarEscape()
     {
         escapando = false;
-        boatMove.ActivarMovimiento(true);
         boatMove.RestaurarInclinacion();
         contadorPulsaciones = 0;
     }
@@ -78,37 +85,14 @@ public class Escape : MonoBehaviour
     {
         Debug.Log("Has perdido!!");
 
-        if (boteFlota != null)
-        {
-            boteFlota.enabled = false;
-        }
-            
+        if (boteFlota != null) boteFlota.enabled = false;
+        boatMove.RestaurarInclinacion();
 
-        if (boatMove != null)
-        {
-            boatMove.RestaurarInclinacion();
-        }
-            
-
-        StartCoroutine(Hundirse());
+        gameController.PerdisteUI();
+        gameController.ReiniciarEscena();
 
     }
 
-    private IEnumerator Hundirse()
-    {
-        float espera = 2.5f;
-        yield return new WaitForSeconds(espera);
 
-        if (reinicioEscena != null)
-        {
-            reinicioEscena.ReiniciarEscena();
-        }
-
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-    }
 
 }
