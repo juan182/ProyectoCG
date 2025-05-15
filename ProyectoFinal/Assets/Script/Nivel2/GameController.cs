@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour
 {
-    public FishManager fishManager;
+   
     public GameObject player;
-    private Escape escapeScript;
 
     private BoatMovement boatMovement;
 
@@ -27,7 +26,6 @@ public class GameController: MonoBehaviour
     void Start()
     {
         boatMovement = player.GetComponent<BoatMovement>();
-        escapeScript = player.GetComponent<Escape>();
 
         PanelPerdiste.SetActive(false);
         PanelGanaste.SetActive(false);
@@ -67,22 +65,7 @@ public class GameController: MonoBehaviour
 
     public void TerminarEscape(bool exito)
     {
-        escapeScript.TerminarEscape(); 
-        boatMovement.ActivarMovimiento(true);
 
-        foreach (var tiburon in FindObjectsOfType<FishEnemy>())
-        {
-            tiburon.DesactivarAtaque(4f);
-        }
-
-        if (exito)
-        {
-            GanasteUI();
-        }
-        else
-        {
-            PerdisteUI();
-        }
     }
 
     public void PerdisteUI()
