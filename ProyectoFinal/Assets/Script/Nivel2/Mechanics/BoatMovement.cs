@@ -48,9 +48,9 @@ public class BoatMovement : MonoBehaviour
         rb.MoveRotation(rb.rotation * rotacion);
     }
 
-    public void ActivarMovimiento(bool activar)
+    public void ActivarMovimiento(bool estado)
     {
-        puedeMoverse = activar;
+        this.enabled = estado;
     }
 
     public void CongelarInclinacion()
