@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BoteFlota : MonoBehaviour
 {
-    public float alturaAgua = 70.2f; // Nivel del agua
-    public float alturaMaxInmersion = 0.5f; // Hasta qué punto el bote puede sumergirse antes de aplicar flotación total
-    public float flotacion = 15f; // Qué tan fuerte es la fuerza de flotación
+    [SerializeField]
+    private float alturaAgua = 69.22f;
+    [SerializeField]
+    private float alturaMaxInmersion = 0.5f;
+    [SerializeField]
+    private float flotacion = 15f; 
 
     private Rigidbody rb;
 
