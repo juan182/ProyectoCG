@@ -1,62 +1,62 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class SharkPatrol : MonoBehaviour
 {
+    [SerializeField] private Transform[] puntosPatrulla;
+    [SerializeField] private float velocidadPatrulla = 3.5f;
+    [SerializeField] private float velocidadPersecucion = 6f;
 
-    [SerializeField]
-    private Transform[] puntosPatrulla;
-
+    private NavMeshAgent agent;
+    private GameController gc;
     private Transform player;
 
     private int currentPointIndex = 0;
     private bool persecucion = false;
-    [SerializeField]
     private bool espera = false;
+    private bool cooldownActivo = false;
 
-    private NavMeshAgent agent;
-    private GameController gc;
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
+        agent.speed = velocidadPatrulla;
         gc = FindObjectOfType<GameController>();
 
         if (puntosPatrulla.Length > 0)
-        {
             agent.SetDestination(puntosPatrulla[currentPointIndex].position);
-        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (espera) return;
+        if (espera) { agent.isStopped = true; return; }
 
-        if (persecucion)
+        if (persecucion && player != null)
         {
-            if (player != null)
-                agent.SetDestination(player.position);
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
             return;
         }
+        else agent.isStopped = false;
 
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!agent.pathPending &&
+            agent.remainingDistance <= agent.stoppingDistance &&
+            (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
         {
-            currentPointIndex = (currentPointIndex + 1) % puntosPatrulla.Length;
-            agent.SetDestination(puntosPatrulla[currentPointIndex].position);
+            Patrulla();
         }
     }
 
-    public void DetenerPorColision()
+    public void Patrulla()
+    {
+        currentPointIndex = (currentPointIndex + 1) % puntosPatrulla.Length;
+        agent.SetDestination(puntosPatrulla[currentPointIndex].position);
+    }
+
+    public void DetenerPatrulla()
     {
         espera = true;
+        persecucion = false;
         agent.isStopped = true;
     }
 
@@ -64,12 +64,16 @@ public class SharkPatrol : MonoBehaviour
     {
         espera = false;
         agent.isStopped = false;
+        Patrulla();
     }
 
     public void Persecucion(Transform plr)
     {
+        if (cooldownActivo) return;
+
         persecucion = true;
         player = plr;
+        agent.speed = velocidadPersecucion;
         agent.SetDestination(plr.position);
         gc.AlertaTiburon();
     }
@@ -78,11 +82,30 @@ public class SharkPatrol : MonoBehaviour
     {
         persecucion = false;
         player = null;
-
-        currentPointIndex = (currentPointIndex + 1) % puntosPatrulla.Length;
-        agent.SetDestination(puntosPatrulla[currentPointIndex].position);
-
+        agent.speed = velocidadPatrulla;
+        Patrulla();
         gc.SalirAtaque();
+        Debug.Log("Sale de la persecusion");
     }
 
+    public void PausarPersecucion(float duracion)
+    {
+        if (persecucion)
+            StartCoroutine(PausarPersecucionCoroutine(duracion));
+    }
+
+    private IEnumerator PausarPersecucionCoroutine(float duracion)
+    {
+        DetenerPatrulla();
+        cooldownActivo = true;
+
+        yield return new WaitForSeconds(duracion);
+
+        espera = false;
+        persecucion = false;
+        cooldownActivo = false;
+
+        Patrulla();
+        agent.isStopped = false;
+    }
 }

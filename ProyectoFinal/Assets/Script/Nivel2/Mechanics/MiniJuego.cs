@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniJuego : MonoBehaviour
@@ -9,12 +8,9 @@ public class MiniJuego : MonoBehaviour
 
     private GameController gc;
     private bool activo = false;
-
+    private bool terminado = false;
     private float tiempoLimiteMJ = 3f;
 
-    private bool terminado = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         gc = FindObjectOfType<GameController>();
@@ -24,11 +20,11 @@ public class MiniJuego : MonoBehaviour
     {
         pulsacionesActuales = 0;
         activo = true;
+        terminado = false;
         gc.Contador(pulsacionesActuales);
         StartCoroutine(TiempoLimite());
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!activo || terminado) return;
@@ -40,10 +36,9 @@ public class MiniJuego : MonoBehaviour
 
             if (pulsacionesActuales >= pulsacionesNecesarias)
             {
-
-                gc.TerminarEscape(true);
-            
                 activo = false;
+                terminado = true;
+                gc.TerminarEscape(true);
             }
         }
     }
@@ -59,5 +54,4 @@ public class MiniJuego : MonoBehaviour
             gc.TerminarEscape(false);
         }
     }
-
 }

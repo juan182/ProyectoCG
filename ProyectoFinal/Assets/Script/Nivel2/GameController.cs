@@ -11,7 +11,6 @@ public class GameController: MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject minijuego;
-
     [SerializeField]
     private GameObject PanelPerdiste;
     [SerializeField]
@@ -22,24 +21,24 @@ public class GameController: MonoBehaviour
     private GameObject PanelAlertaTiburon;
     [SerializeField]
     private TextMeshProUGUI conteo;
-
     [SerializeField]
-    private GameObject zonaAtaque;
-    [SerializeField]
-    private SharkPatrol patrullaTiburon;
+    private TextMeshProUGUI tiburones;
 
+    private bool minijuegoActivo = false;
+    private int tiburonConteo;
+
+    private SharkPatrol tiburonActual;
+
+    [SerializeField] 
+    private SharkAttackManager sharkManager;
     private void Awake()
     {
-        
+        tiburonConteo=0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        
-        PanelPerdiste.SetActive(false);
-        PanelGanaste.SetActive(false);
 
     }
 
@@ -53,6 +52,7 @@ public class GameController: MonoBehaviour
 
     public void AlertaTiburon()
     {
+        
         PanelAlertaTiburon.SetActive(true);
         PanelMinijuego.SetActive(false);
         PanelPerdiste.SetActive(false);
@@ -61,40 +61,59 @@ public class GameController: MonoBehaviour
 
     public void Contador(int value)
     {
+        
         conteo.text =value.ToString();
     }
 
-    public void MiniJuego()
+    public void TiburonConteo()
     {
-        PanelAlertaTiburon.SetActive(false);
-        PanelMinijuego.SetActive(true);
-        PanelPerdiste.SetActive(false);
-        PanelGanaste.SetActive(false);
+        tiburonConteo++;
+        tiburones.text = tiburonConteo.ToString();
+    }
 
+    public void MiniJuego(SharkPatrol tiburon)
+    {
+        if (minijuegoActivo) return;
+
+        PanelMinijuego.SetActive(true);
+        PanelAlertaTiburon.SetActive(false);
+        tiburonActual = tiburon;
+        minijuegoActivo = true;
         minijuego.SetActive(true);
         Contador(0);
 
         MiniJuego scriptMJ = minijuego.GetComponent<MiniJuego>();
         if (scriptMJ != null)
-        {
             scriptMJ.InicioMiniJuego();
-        }
     }
+
 
     public void TerminarEscape(bool exito)
     {
-        if (exito == true)
+        if (!minijuegoActivo) return;
+
+        minijuegoActivo = false;
+        minijuego.SetActive(false);
+
+        if (tiburonActual != null)
         {
+            tiburonActual.SalirPersecucion();
+            tiburonActual = null;
+        }
+
+        if (exito)
+        {
+            TiburonConteo();
             GanasteUI();
+
         }
         else
         {
             PerdisteUI();
         }
-        minijuego.SetActive(false);
 
-        ReanudarPatrullaje();
-
+        if (sharkManager != null)
+            sharkManager.ReanudarAtaqueYPatrulla();
     }
     public void SalirAtaque()
     {
@@ -141,27 +160,4 @@ public class GameController: MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void ReanudarPatrullaje()
-    {
-        StartCoroutine(ReactivarZonaAtaquePatrullaje());
-    }
-
-    private IEnumerator ReactivarZonaAtaquePatrullaje()
-    {
-        if (zonaAtaque != null)
-        {
-            zonaAtaque.SetActive(false);
-        }
-
-        yield return new WaitForSeconds(3f);
-
-        if (patrullaTiburon != null)
-        {
-            patrullaTiburon.ReanudarPatrulla();
-        }
-        if (zonaAtaque != null)
-        {
-            zonaAtaque.SetActive(true);
-        }
-    }
 }
