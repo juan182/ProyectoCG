@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4967529627517328688}
   - component: {fileID: 8189227578903585840}
   m_Layer: 5
-  m_Name: ConteoLlaves
+  m_Name: Cronometro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1726,7 +1726,7 @@ GameObject:
   - component: {fileID: 152874510261920570}
   - component: {fileID: 5738303442269597276}
   m_Layer: 5
-  m_Name: Llave
+  m_Name: cronometro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1749,8 +1749,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 808, y: 394}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 811.4968, y: 390.5}
+  m_SizeDelta: {x: 106.9937, y: 106.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &152874510261920570
 CanvasRenderer:
@@ -1780,7 +1780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4998a86ca530a874da9c6e62d6938649, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31903ae73821a0943a33be470b53e839, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
