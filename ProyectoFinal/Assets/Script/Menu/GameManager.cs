@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     //Recolectables
-    //private int Coper = 0; //10 puntos
-    //private int Gold = 0; //50 puntos
-    //private int Silver = 0; //100 puntos
+    int Coper = 0; //10 puntos
+    int Gold = 0; //50 puntos
+    int Silver = 0; //100 puntos
 
     private void Awake()
     {

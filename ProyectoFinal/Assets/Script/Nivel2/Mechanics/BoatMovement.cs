@@ -50,7 +50,13 @@ public class BoatMovement : MonoBehaviour
 
     public void ActivarMovimiento(bool estado)
     {
-        this.enabled = estado;
+        puedeMoverse = estado;
+        if (!estado)
+        {
+            // Detener el movimiento completamente
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     public void CongelarInclinacion()
