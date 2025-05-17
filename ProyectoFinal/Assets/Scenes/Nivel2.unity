@@ -175,7 +175,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -188,7 +188,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51786051}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -653,7 +653,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 51786052}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 174314, guid: 3dc82f88b805ff142b804693e2585a17,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1014063377}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc82f88b805ff142b804693e2585a17, type: 3}
 --- !u!1 &291826378
 GameObject:
@@ -2143,6 +2147,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 255575399}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014063377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014063369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4f36cee3e442845818c2b53eeec96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1035354317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2234,6 +2250,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1774847030}
+    - targetCorrespondingSourceObject: {fileID: 2253393103804301607, guid: e360d8d16d87ca544b56a603ea831f2f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1774847032}
+    - targetCorrespondingSourceObject: {fileID: 2253393103804301607, guid: e360d8d16d87ca544b56a603ea831f2f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1774847031}
   m_SourcePrefab: {fileID: 100100000, guid: e360d8d16d87ca544b56a603ea831f2f, type: 3}
 --- !u!1 &1115563391
 GameObject:
@@ -2798,6 +2822,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491b1e31ffa538444ae3e9245f3b0d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1774847031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774847025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2aa3aad6bee984cb34ecbdf25ad231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1774847032
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774847025}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9000504, y: 1.009455, z: 0.35542694}
+  m_Center: {x: -0.18607347, y: 0.022766173, z: 0.0000025928016}
 --- !u!114 &1777049142 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7889456460036541447, guid: 3919833438e1a3f4cbdffbff6f3819ac,
@@ -2912,9 +2969,29 @@ MonoBehaviour:
   PanelGanaste: {fileID: 1429806288}
   PanelMinijuego: {fileID: 1823816227}
   PanelAlertaTiburon: {fileID: 1629852177}
+  PanelTiempo: {fileID: 1875116788}
   conteo: {fileID: 1531195520}
   tiburones: {fileID: 1777049142}
+  cuentaRegresiva: {fileID: 1838479078}
   sharkManager: {fileID: 806151577}
+--- !u!114 &1838479078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8189227578903585840, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 7919299283713760311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1875116788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6875715252955235283, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 7919299283713760311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1875321670
 GameObject:
   m_ObjectHideFlags: 0
@@ -12648,6 +12725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ---- UIMiniGame ----
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875715252955235283, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7079814991599854450, guid: 3919833438e1a3f4cbdffbff6f3819ac,
         type: 3}

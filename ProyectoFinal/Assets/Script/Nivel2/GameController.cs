@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController: MonoBehaviour
+public class GameController : MonoBehaviour
 {
     [SerializeField]
     private GameObject player;
@@ -20,17 +20,27 @@ public class GameController: MonoBehaviour
     [SerializeField]
     private GameObject PanelAlertaTiburon;
     [SerializeField]
+    private GameObject PanelTiempo;
+    [SerializeField]
     private TextMeshProUGUI conteo;
     [SerializeField]
     private TextMeshProUGUI tiburones;
+    [SerializeField]
+    private TextMeshProUGUI cuentaRegresiva;
 
+    private float cuentaRegresivaTiempo = 60f;
+    private float currentTime;
+    private bool cuentaRegresivaActiva = true;
     private bool minijuegoActivo = false;
     private int tiburonConteo;
 
     private SharkPatrol tiburonActual;
 
-    [SerializeField] 
+    [SerializeField]
     private SharkAttackManager sharkManager;
+
+
+
     private void Awake()
     {
         tiburonConteo=0;
@@ -39,15 +49,41 @@ public class GameController: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentTime = cuentaRegresivaTiempo;
+        UpdateCountdownUI(currentTime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (cuentaRegresivaActiva)
+        {
+            currentTime -= Time.deltaTime;
+
+            if (currentTime > 0)
+            {
+                UpdateCountdownUI(currentTime);
+            }
+            else
+            {
+                cuentaRegresivaActiva = false;
+                currentTime = 0;
+                UpdateCountdownUI(currentTime);
+                PanelTiempo.SetActive(true);
+                ReiniciarEscena();
+                
+            }
+        }
     }
 
+    void UpdateCountdownUI(float time)
+    {
+        
+        int seconds = Mathf.FloorToInt(time % 60);
+        
+
+        cuentaRegresiva.text = string.Format("{00}", seconds);
+    }
 
 
     public void AlertaTiburon()
@@ -57,6 +93,7 @@ public class GameController: MonoBehaviour
         PanelMinijuego.SetActive(false);
         PanelPerdiste.SetActive(false);
         PanelGanaste.SetActive(false);
+        PanelTiempo.SetActive(false);
     }
 
     public void Contador(int value)
@@ -115,12 +152,14 @@ public class GameController: MonoBehaviour
         if (sharkManager != null)
             sharkManager.ReanudarAtaqueYPatrulla();
     }
+
     public void SalirAtaque()
     {
         PanelPerdiste.SetActive(false);
         PanelGanaste.SetActive(false);
         PanelAlertaTiburon.SetActive(false);
         PanelMinijuego.SetActive(false);
+        PanelTiempo.SetActive(false);
     }
 
     public void PerdisteUI()
@@ -129,6 +168,7 @@ public class GameController: MonoBehaviour
         PanelGanaste.SetActive(false);
         PanelAlertaTiburon.SetActive(false);
         PanelMinijuego.SetActive(false);
+        PanelTiempo.SetActive(false);
 
         ReiniciarEscena();
     }
@@ -139,9 +179,12 @@ public class GameController: MonoBehaviour
         PanelGanaste.SetActive(true);
         PanelAlertaTiburon.SetActive(false);
         PanelMinijuego.SetActive(false);
+        PanelTiempo.SetActive(false);
 
         StartCoroutine(DesactivarPanel(PanelGanaste, 2f));
     }
+
+
 
     private IEnumerator DesactivarPanel(GameObject panel, float segundos)
     {
