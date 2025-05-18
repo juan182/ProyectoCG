@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class loadsceneprueba : MonoBehaviour
+public class SilverCoin : MonoBehaviour
 {
-
+    private int point = 100;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Nivel2");
+            GameManager.Instance.sumSilverCoin(point);
         }
+        Destroy(gameObject);
     }
-
 
 }

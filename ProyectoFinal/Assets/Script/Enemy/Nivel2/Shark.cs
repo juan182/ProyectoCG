@@ -6,6 +6,7 @@ public class Shark : MonoBehaviour
     private SharkPatrol patrulla;
     private bool colision = false;
     private bool cooldownActivo = false;
+    private int sharks = 10;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class Shark : MonoBehaviour
         {
             colision = true;
             cooldownActivo = true;
+            GameManager.Instance.sumShark(sharks);
 
             Transform playerTransform = collision.transform;
             patrulla.Persecucion(playerTransform);

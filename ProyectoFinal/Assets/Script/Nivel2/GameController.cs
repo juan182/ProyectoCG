@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour
     public void TiburonConteo()
     {
         tiburonConteo++;
-        tiburones.text = tiburonConteo.ToString();
+        tiburones.text = GameManager.Instance.shark.ToString();
     }
 
     public void MiniJuego(SharkPatrol tiburon)
