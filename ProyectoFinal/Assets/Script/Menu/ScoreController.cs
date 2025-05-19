@@ -17,7 +17,7 @@ public class ScoreController : MonoBehaviour
     private GameObject PanelDetalles;
 
     [SerializeField]
-    private TMP_InputField Nombre;
+    private TMP_InputField InputFieldNombre;
 
     [SerializeField]
     private Button Resumen;
@@ -46,6 +46,8 @@ public class ScoreController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI Milisegundos;
 
+    [SerializeField]
+    private TextMeshProUGUI mensajeError;
 
     #region TextMeshProDetallesResumen
     [SerializeField] private TextMeshProUGUI minEscena1;
@@ -63,7 +65,9 @@ public class ScoreController : MonoBehaviour
 
     private Dictionary<string, (TextMeshProUGUI min, TextMeshProUGUI seg, TextMeshProUGUI mil)> uiPorEscena;
 
-
+    #region Usuario
+    private string nombreUsuario;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -107,9 +111,22 @@ public class ScoreController : MonoBehaviour
 
     public void VerResumen()
     {
-        PanelNombre.SetActive(false);
-        PanelResumen.SetActive(true);
-        PanelDetalles.SetActive(false);
+        nombreUsuario = InputFieldNombre.text.Trim();
+        GameManager.Instance.nombreJugador = nombreUsuario.ToString();
+
+        if (string.IsNullOrEmpty(nombreUsuario))
+        {
+            mensajeError.gameObject.SetActive(true);
+        }
+        else
+        {
+            mensajeError.gameObject.SetActive(false);
+
+
+            PanelNombre.SetActive(false);
+            PanelResumen.SetActive(true);
+            PanelDetalles.SetActive(false);
+        }
     }
 
     public void VerDetalles()
@@ -124,9 +141,9 @@ public class ScoreController : MonoBehaviour
         // Mapea la UI de cada escena
         uiPorEscena = new Dictionary<string, (TextMeshProUGUI, TextMeshProUGUI, TextMeshProUGUI)>
         {
-            { "Escena1", (minEscena1, segEscena1, milEscena1) },
-            { "Escena2", (minEscena2, segEscena2, milEscena2) },
-            { "Escena3", (minEscena3, segEscena3, milEscena3) }
+            { "Nivel1", (minEscena1, segEscena1, milEscena1) },
+            { "Nivel2", (minEscena2, segEscena2, milEscena2) },
+            { "Nivel3", (minEscena3, segEscena3, milEscena3) }
         };
     }
 

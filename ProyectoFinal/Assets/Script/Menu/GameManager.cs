@@ -19,11 +19,14 @@ public class GameManager : MonoBehaviour
     public int gold = 0; //50 puntos
     public int silver = 0; //100 puntos
 
-    //private int health = 5;
+    public int health = 5;
 
     // Diccionario para guardar tiempo de escenas
     public Dictionary<string, float> tiempoEscenas = new Dictionary<string, float>();
 
+    #region Jugador
+    public string nombreJugador;
+    #endregion
 
 
     private void Awake()
@@ -66,6 +69,11 @@ public class GameManager : MonoBehaviour
     {
         gold += value;
     }
+    public void sumHealth(int value)
+    {
+        health += value;
+        health = Mathf.Min(health, 5);
+    }
 
     public void ResetShark()
     {
@@ -93,6 +101,7 @@ public class GameManager : MonoBehaviour
     public int Copper { get => copper; set => copper = value; }
     public int Silver { get => silver; set => silver = value; }
     public int Gold { get => gold; set => gold = value; }
+    public int Health { get => health; set => health = value; }
 
 
     public void GuardarTiemposEscenas(string nombreEscena, float tiempo)

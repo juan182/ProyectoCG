@@ -41,11 +41,15 @@ public class ColLoad : MonoBehaviour
 
     void CargarNuevaEscena()
     {
+        // Guardar el tiempo de la escena actual antes de cargar la siguiente escena
+        GameManager.Instance.GuardarTiemposEscenas(SceneManager.GetActiveScene().name, Timer.Instance.GetElapsedTimeRaw());
+
+        // Si vas a cargar la escena Score, detén el timer
         if (nombreEscena == "Score")
         {
-            GameManager.Instance.GuardarTiemposEscenas(SceneManager.GetActiveScene().name, Timer.Instance.GetElapsedTimeRaw());
-
+            Timer.Instance.TimerStop();
         }
+
         SceneManager.LoadScene(nombreEscena);
     }
 }

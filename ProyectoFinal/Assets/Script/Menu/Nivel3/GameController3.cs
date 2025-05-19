@@ -15,6 +15,9 @@ public class GameController3 : MonoBehaviour, InterfaceTiempoEscena
     [SerializeField]
     private TextMeshProUGUI txtGoldCoin;
 
+    [SerializeField]
+    private TextMeshProUGUI txtHeart;
+
     private string nombreEscena;
 
     // Start is called before the first frame update
@@ -29,21 +32,27 @@ public class GameController3 : MonoBehaviour, InterfaceTiempoEscena
     void Update()
     {
         ShowCopperCoin();
-        ShowSilveCoin();
+        ShowSilverCoin();
         ShowGoldCoin();
+        ShowHealth();
+    }
+
+    public void ShowHealth()
+    {
+        txtHeart.text = GameManager.Instance.health.ToString();
     }
 
     public void ShowCopperCoin()
     {
         txtCopperCoin.text = GameManager.Instance.copper.ToString();
     }
-    public void ShowSilveCoin()
+    public void ShowSilverCoin()
     {
-        txtCopperCoin.text = GameManager.Instance.silver.ToString();
+        txtSilverCoin.text = GameManager.Instance.silver.ToString();
     }
     public void ShowGoldCoin()
     {
-        txtCopperCoin.text = GameManager.Instance.gold.ToString();
+        txtGoldCoin.text = GameManager.Instance.gold.ToString();
     }
 
     public void GuardarTiempoEscena()

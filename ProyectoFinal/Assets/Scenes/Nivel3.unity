@@ -9554,6 +9554,7 @@ MonoBehaviour:
   txtCopperCoin: {fileID: 6959369732813868482}
   txtSilverCoin: {fileID: 6959369732813868481}
   txtGoldCoin: {fileID: 6959369732813868480}
+  txtHeart: {fileID: 6959369732813868483}
 --- !u!1 &1194295998
 GameObject:
   m_ObjectHideFlags: 0
@@ -17919,6 +17920,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250407145555299186, guid: ca3aee15d778b1848876976849442c5c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -540
+      objectReference: {fileID: 0}
+    - target: {fileID: 250407145555299186, guid: ca3aee15d778b1848876976849442c5c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 96
+      objectReference: {fileID: 0}
     - target: {fileID: 475510572227754753, guid: ca3aee15d778b1848876976849442c5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17974,6 +17985,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: -----UI-----
       objectReference: {fileID: 0}
+    - target: {fileID: 6926913036126339063, guid: ca3aee15d778b1848876976849442c5c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -601.3999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926913036126339063, guid: ca3aee15d778b1848876976849442c5c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 95.89995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18006,6 +18027,18 @@ MonoBehaviour:
 --- !u!114 &6959369732813868482 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 44315198940243184, guid: ca3aee15d778b1848876976849442c5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6959369732813868479}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6959369732813868483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1188885992224361285, guid: ca3aee15d778b1848876976849442c5c,
     type: 3}
   m_PrefabInstance: {fileID: 6959369732813868479}
   m_PrefabAsset: {fileID: 0}
