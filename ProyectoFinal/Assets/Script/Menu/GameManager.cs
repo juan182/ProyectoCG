@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     //private int health = 5;
 
-    // Resumen
+    // Diccionario para guardar tiempo de escenas
+    public Dictionary<string, float> tiempoEscenas = new Dictionary<string, float>();
 
 
 
@@ -66,6 +67,11 @@ public class GameManager : MonoBehaviour
         gold += value;
     }
 
+    public void ResetShark()
+    {
+        shark = 0;
+    }
+
     public void resetValue()
     {
         //Escena 1
@@ -87,5 +93,28 @@ public class GameManager : MonoBehaviour
     public int Copper { get => copper; set => copper = value; }
     public int Silver { get => silver; set => silver = value; }
     public int Gold { get => gold; set => gold = value; }
+
+
+    public void GuardarTiemposEscenas(string nombreEscena, float tiempo)
+    {
+        if (tiempoEscenas.ContainsKey(nombreEscena))
+        {
+            tiempoEscenas[nombreEscena] += tiempo;
+        }
+        else
+        {
+            tiempoEscenas[nombreEscena] = tiempo;
+        }
+    }
+
+    public float ObtenerTiempoTotal()
+    {
+        float total = 0f;
+        foreach(var tiempo in tiempoEscenas.Values)
+        {
+            total += tiempo;
+        }
+        return total;
+    }
 
 }

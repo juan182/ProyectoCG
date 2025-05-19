@@ -11,12 +11,41 @@ public class ColLoad : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            InterfaceTiempoEscena controlador = null;
+
+            // Buscar todos los MonoBehaviours y encontrar uno que implemente InterfaceTiempoEscena
+            MonoBehaviour[] todos = FindObjectsOfType<MonoBehaviour>();
+            foreach (var mono in todos)
+            {
+                if (mono is InterfaceTiempoEscena)
+                {
+                    controlador = mono as InterfaceTiempoEscena;
+                    break;
+                }
+            }
+
+            if (controlador != null)
+            {
+                Debug.Log("Controlador con InterfaceTiempoEscena encontrado. Guardando tiempo...");
+
+                controlador.GuardarTiempoEscena();
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró un controlador que implemente InterfaceTiempoEscena.");
+            }
+
             CargarNuevaEscena();
         }
     }
 
     void CargarNuevaEscena()
     {
+        if (nombreEscena == "Score")
+        {
+            GameManager.Instance.GuardarTiemposEscenas(SceneManager.GetActiveScene().name, Timer.Instance.GetElapsedTimeRaw());
+
+        }
         SceneManager.LoadScene(nombreEscena);
     }
 }

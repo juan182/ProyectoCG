@@ -2257,7 +2257,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2253393103804301607, guid: e360d8d16d87ca544b56a603ea831f2f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1774847031}
+      addedObject: {fileID: 1774847033}
   m_SourcePrefab: {fileID: 100100000, guid: e360d8d16d87ca544b56a603ea831f2f, type: 3}
 --- !u!1 &1115563391
 GameObject:
@@ -2822,18 +2822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491b1e31ffa538444ae3e9245f3b0d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1774847031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774847025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea2aa3aad6bee984cb34ecbdf25ad231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1774847032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2855,6 +2843,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9000504, y: 1.009455, z: 0.35542694}
   m_Center: {x: -0.18607347, y: 0.022766173, z: 0.0000025928016}
+--- !u!114 &1774847033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774847025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a62bf1cc82b90644a4a0a9a3e74f55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreEscena: Nivel3
 --- !u!114 &1777049142 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7889456460036541447, guid: 3919833438e1a3f4cbdffbff6f3819ac,

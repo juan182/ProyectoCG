@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, InterfaceTiempoEscena
 {
     [SerializeField]
     private GameObject player;
@@ -32,18 +33,18 @@ public class GameController : MonoBehaviour
     private float currentTime;
     private bool cuentaRegresivaActiva = true;
     private bool minijuegoActivo = false;
-    private int tiburonConteo;
 
     private SharkPatrol tiburonActual;
 
     [SerializeField]
     private SharkAttackManager sharkManager;
 
+    private string nombreEscena;
 
 
     private void Awake()
     {
-        tiburonConteo=0;
+        
     }
 
     // Start is called before the first frame update
@@ -51,6 +52,9 @@ public class GameController : MonoBehaviour
     {
         currentTime = cuentaRegresivaTiempo;
         UpdateCountdownUI(currentTime);
+
+        nombreEscena = SceneManager.GetActiveScene().name;
+        Timer.Instance.TimerStart();
     }
 
     // Update is called once per frame
@@ -104,7 +108,7 @@ public class GameController : MonoBehaviour
 
     public void TiburonConteo()
     {
-        tiburonConteo++;
+        //tiburonConteo++;
         tiburones.text = GameManager.Instance.shark.ToString();
     }
 
@@ -117,7 +121,7 @@ public class GameController : MonoBehaviour
         tiburonActual = tiburon;
         minijuegoActivo = true;
         minijuego.SetActive(true);
-        Contador(0);
+        //Contador(0);
 
         MiniJuego scriptMJ = minijuego.GetComponent<MiniJuego>();
         if (scriptMJ != null)
@@ -199,8 +203,19 @@ public class GameController : MonoBehaviour
 
     private IEnumerator Reiniciar(float segundos)
     {
+        GameManager.Instance.ResetShark();
         yield return new WaitForSeconds(segundos);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GuardarTiempoEscena()
+    {
+        Timer.Instance.TimerStop();
+
+        float tiempoEscena = Timer.Instance.GetElapsedTimeRaw();
+        GameManager.Instance.GuardarTiemposEscenas(nombreEscena, tiempoEscena);
+
+        Timer.Instance.TimerReset();
     }
 
 }

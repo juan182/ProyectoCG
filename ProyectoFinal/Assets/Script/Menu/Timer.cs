@@ -27,9 +27,6 @@ public class Timer : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-
-
-
         }
         else
         {
@@ -45,18 +42,31 @@ public class Timer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (!isRunning)
-        {
-            // TimerStart();
-        }
+        //if (!isRunning)
+        //{
+        //    // TimerStart();
+        //}
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Busca los textos del timer en cada nueva escena por nombre
-        timerMinutes = GameObject.Find("txtMinutos")?.GetComponent<TextMeshProUGUI>();
-        timerSeconds = GameObject.Find("txtSegundos")?.GetComponent<TextMeshProUGUI>();
-        timerSeconds100 = GameObject.Find("txtMiliSegundos")?.GetComponent<TextMeshProUGUI>();
+        if (scene.name == "Score")
+        {
+            TimerStop(); // Detiene el timer cuando cargas la escena score
+            timerMinutes = GameObject.Find("txtMinutos")?.GetComponent<TextMeshProUGUI>();
+            timerSeconds = GameObject.Find("txtSegundos")?.GetComponent<TextMeshProUGUI>();
+            timerSeconds100 = GameObject.Find("txtMiliSegundos")?.GetComponent<TextMeshProUGUI>();
+
+            string tiempoFormateado = GetElapsedTime();
+
+            // Asignar los valores individuales a los textos
+            if (tiempoFormateado.Length >= 8)
+            {
+                if (timerMinutes != null) timerMinutes.text = tiempoFormateado.Substring(0, 2);     // mm
+                if (timerSeconds != null) timerSeconds.text = tiempoFormateado.Substring(3, 2);     // ss
+                if (timerSeconds100 != null) timerSeconds100.text = tiempoFormateado.Substring(6, 2); // cs
+            }
+        }
     }
 
     public void TimerStart()
@@ -83,14 +93,14 @@ public class Timer : MonoBehaviour
 
     public void TimerReset()
     {
-        print("RESET");
+        
         stopTotalTime = 0;
         isRunning = false;
         startTime = 0;
 
-        if (timerMinutes != null) timerMinutes.text = "00";
-        if (timerSeconds != null) timerSeconds.text = "00";
-        if (timerSeconds100 != null) timerSeconds100.text = "00";
+        //if (timerMinutes != null) timerMinutes.text = "00";
+        //if (timerSeconds != null) timerSeconds.text = "00";
+        //if (timerSeconds100 != null) timerSeconds100.text = "00";
 
     }
 
@@ -99,19 +109,19 @@ public class Timer : MonoBehaviour
     {
 
 
-        if (isRunning)
-        {
-            float currentTime = stopTotalTime + (Time.time - startTime);
-            int minutesInt = (int)(currentTime / 60);
-            int secondsInt = (int)(currentTime % 60);
-            int seconds100Int = (int)((currentTime - (minutesInt * 60 + secondsInt)) * 100);
+        //if (isRunning)
+        //{
+        //    float currentTime = stopTotalTime + (Time.time - startTime);
+        //    int minutesInt = (int)(currentTime / 60);
+        //    int secondsInt = (int)(currentTime % 60);
+        //    int seconds100Int = (int)((currentTime - (minutesInt * 60 + secondsInt)) * 100);
 
-            if (timerMinutes != null) timerMinutes.text = minutesInt.ToString("00");
-            if (timerSeconds != null) timerSeconds.text = secondsInt.ToString("00");
-            if (timerSeconds100 != null) timerSeconds100.text = seconds100Int.ToString("00");
+        //    //if (timerMinutes != null) timerMinutes.text = minutesInt.ToString("00");
+        //    //if (timerSeconds != null) timerSeconds.text = secondsInt.ToString("00");
+        //    //if (timerSeconds100 != null) timerSeconds100.text = seconds100Int.ToString("00");
 
 
-        }
+        //}
     }
 
     public string GetElapsedTime()

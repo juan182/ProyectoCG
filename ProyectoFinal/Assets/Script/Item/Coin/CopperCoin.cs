@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CopperCoin : MonoBehaviour
 {
-    public int point = 10;
+    private int point = 10;
 
     public AudioClip audioCopper;
 
