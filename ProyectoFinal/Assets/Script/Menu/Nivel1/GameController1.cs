@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController1 : MonoBehaviour, InterfaceTiempoEscena
 {
-    [SerializeField]
+   
     private TextMeshProUGUI partesCarretilla;
 
     private string nombreEscena;
@@ -21,13 +21,13 @@ public class GameController1 : MonoBehaviour, InterfaceTiempoEscena
     // Update is called once per frame
     void Update()
     {
-        ShowCarretillas();
+        //ShowCarretillas();
     }
 
-    public void ShowCarretillas()
-    {
-        partesCarretilla.text = GameManager.Instance.carretilla.ToString();
-    }
+    //public void ShowCarretillas()
+    //{
+    //    partesCarretilla.text = GameManager.Instance.carretilla.ToString();
+    //}
 
     public void GuardarTiempoEscena()
     {

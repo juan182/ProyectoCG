@@ -15,7 +15,7 @@ public class GuardarDatosJugador : MonoBehaviour
     private Transform contenidoTexto;
 
     [SerializeField]
-    private GameObject textoContenido;
+    private TextMeshProUGUI textoContenido;
 
     Historial historial = new Historial();
 
@@ -29,7 +29,7 @@ public class GuardarDatosJugador : MonoBehaviour
             historial = JsonUtility.FromJson<Historial>(jsonArchive);
         }
 
-        PanelDatosCargados.SetActive(false);
+        //PanelDatosCargados.SetActive(false);
     }
 
 
@@ -71,18 +71,27 @@ public class GuardarDatosJugador : MonoBehaviour
 
             foreach (DatosJugador datos in historial.partidas)
             {
-                GameObject nuevoItem = Instantiate(textoContenido, contenidoTexto);
+                
+               
 
-                TextMeshProUGUI textoFinal = nuevoItem.GetComponentInChildren<TextMeshProUGUI>();
-
-                textoFinal.text = $"<b>Nombre:</b> {datos.nombreJugador}\n" +
+                TextMeshProUGUI nuevoItem = Instantiate(textoContenido, contenidoTexto);
+                if (nuevoItem != null)
+                {
+                    nuevoItem.text = $"<b>Nombre:</b> {datos.nombreJugador}\n" +
                                 $"<b>Carretilla:</b> {datos.carretilla}\n" +
                                 $"<b>Shark:</b> {datos.shark}\n" +
                                 $"<b>Monedas:</b>\n" +
                                 $" - Oro: {datos.goldCoin}\n" +
                                 $" - Plata: {datos.silverCoin}\n" +
                                 $" - Cobre: {datos.copperCoin}\n" +
-                                $"<b>Tiempo total:</b> {FormatearTiempo(datos.tiempoTotal)}\n\n";
+                                $"<b>Tiempo total:</b> {FormatearTiempo(datos.tiempoTotal)}\n\n"+
+                                $"<b>Fecha de creacion:</b>{datos.fecha}\n";
+                }
+                else
+                {
+                    Debug.LogError("No se encontró TextMeshProUGUI en el prefab instanciado");
+                }
+                
             }
 
             

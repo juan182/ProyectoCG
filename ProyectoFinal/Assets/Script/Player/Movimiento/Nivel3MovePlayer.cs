@@ -8,7 +8,7 @@ public class Nivel3MovePlayer : MonoBehaviour
     private CharacterController conn;
 
     // Vida
-    public int health = GameManager.Instance.health;
+    public int health;
 
     // Movimiento
     float speed = 5;
@@ -39,6 +39,7 @@ public class Nivel3MovePlayer : MonoBehaviour
         // Componente
         conn = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
+        health = GameManager.Instance.health;
 
         // Registra posición de inicio
         initialPosition = transform.position;

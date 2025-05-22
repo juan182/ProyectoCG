@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Historial : MonoBehaviour
+[System.Serializable]
+public class Historial
 {
     public List<DatosJugador> partidas =new List<DatosJugador>();
 }
