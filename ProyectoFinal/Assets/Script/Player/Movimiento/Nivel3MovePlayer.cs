@@ -136,7 +136,6 @@ public class Nivel3MovePlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             hit();
-            ResetPlayerPosition();
         }
     }
 }

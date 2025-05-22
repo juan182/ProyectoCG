@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using TMPro;
 using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
     public GameObject objectToActivate;
-    private int point = 1;
+    public int point = 0;
 
     void OnTriggerEnter(Collider other)
     {
