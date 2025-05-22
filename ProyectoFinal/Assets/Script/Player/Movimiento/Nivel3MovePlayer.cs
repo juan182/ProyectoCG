@@ -2,33 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Nivel3MovePlayer : MonoBehaviour
 {
     private CharacterController conn;
 
-    //Vida
-    public int health = 5;
+    // Vida
+    public int health = GameManager.Instance.health;
 
-    //Movimiento
+    // Movimiento
     float speed = 5;
     float horizontal;
     float vertical;
 
-    //Rotacion
+    // Rotación
     Vector3 moveDirection;
     float rotationSpeed = 360;
     Quaternion toRotate;
     float magnitud;
 
-    //Animacion
+    // Animación
     private Animator anim;
 
-    //Posicion
+    // Posición
     private Vector3 initialPosition;
 
-    //Salto
+    // Salto
     float jumpSpeed = 10;
     float ySpeed;
     Vector3 vel;
@@ -37,11 +36,11 @@ public class Nivel3MovePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Componente
+        // Componente
         conn = GetComponent<CharacterController>();
         anim = transform.GetChild(0).GetComponent<Animator>();
 
-        //Registra posicion de inicio
+        // Registra posición de inicio
         initialPosition = transform.position;
         Debug.Log("Posición inicial registrada: " + initialPosition);
     }
@@ -49,14 +48,22 @@ public class Nivel3MovePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Toma el valor de Horizontal
+        // Toma el valor de Horizontal
         horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical")*-1;
+        vertical = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector3(vertical, 0, horizontal);
-        moveDirection.Normalize();
+        // Calcula la dirección de movimiento basada en la rotación del jugador
+        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+        Vector3 right = Camera.main.transform.TransformDirection(Vector3.right);
+        forward.y = 0; // Asegúrate de que no se mueva hacia arriba o abajo
+        right.y = 0;
 
-        //Magnitud
+        forward.Normalize();
+        right.Normalize();
+
+        moveDirection = (forward * vertical + right * horizontal).normalized;
+
+        // Magnitud
         magnitud = moveDirection.magnitude;
         magnitud = Mathf.Clamp01(magnitud);
         anim.SetFloat("Speed", magnitud);
@@ -65,7 +72,7 @@ public class Nivel3MovePlayer : MonoBehaviour
         conn.SimpleMove(moveDirection * magnitud * speed);
 
         ySpeed += Physics.gravity.y * Time.deltaTime;
-        
+
         vel = moveDirection * magnitud;
         vel.y = ySpeed;
 
@@ -84,13 +91,13 @@ public class Nivel3MovePlayer : MonoBehaviour
             }
         }
 
-        if(moveDirection != Vector3.zero)
+        if (moveDirection != Vector3.zero)
         {
             toRotate = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
         }
 
-        //Caida
+        // Caída
         if (transform.position.y < -0.5f)
         {
             ResetPlayerPosition();
@@ -101,34 +108,34 @@ public class Nivel3MovePlayer : MonoBehaviour
     {
         transform.position = initialPosition;
     }
+
     public float threshold;
 
     public void hit()
     {
         health = health - 1;
+        GameManager.Instance.health = health;
 
         if (health <= 0)
         {
             ResetPlayerPosition();
             health = 5;
+            GameManager.Instance.health = health;
         }
     }
 
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
-        //Enemigo
+        // Enemigo
         if (collision.gameObject.CompareTag("Enemie"))
         {
-            // Lógica para manejar la colisión
-
             hit();
         }
-        //Trampa
+        // Trampa
         if (collision.gameObject.CompareTag("Trap"))
         {
             hit();
-            // Lógica para manejar la colisión
-            //ResetPlayerPosition();
+            ResetPlayerPosition();
         }
     }
 }
