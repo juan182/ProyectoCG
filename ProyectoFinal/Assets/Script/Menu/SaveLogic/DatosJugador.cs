@@ -12,6 +12,6 @@ public class DatosJugador
     public int copperCoin;
     public int shark;
     public float tiempoTotal;
-    public List<TiempoEscena> tiemposPorEscena;
+    public string fecha;
 
 }
