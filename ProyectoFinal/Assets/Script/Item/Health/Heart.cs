@@ -5,6 +5,7 @@ using UnityEngine;
 public class Heart : MonoBehaviour
 {
     public int cantidadDeVida = 2;
+    public AudioClip audioHeart;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,10 @@ public class Heart : MonoBehaviour
             }
             GameManager.Instance.sumHealth(cantidadDeVida);
             Destroy(gameObject);
+            if (audioHeart != null)
+            {
+                AudioSource.PlayClipAtPoint(audioHeart, Camera.main.transform.position);
+            }
         }
     }
 }

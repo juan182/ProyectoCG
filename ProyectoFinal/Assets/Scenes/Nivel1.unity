@@ -3491,7 +3491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Recoje 5 piezas del carro
+  m_text: Recoje 5 para reparar el carro
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5245,6 +5245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 6677007102857613972}
   point: 1
+  clip: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
 --- !u!65 &4976420405645074109
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5482,6 +5483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 7936973365837052977}
   point: 1
+  clip: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
 --- !u!65 &6677007102857613974
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5575,6 +5577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 4976420405645074107}
   point: 1
+  clip: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
 --- !u!65 &6809979113311153001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5645,6 +5648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 933744124}
   point: 1
+  clip: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
 --- !u!65 &7936973365837052979
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5696,6 +5700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToActivate: {fileID: 4722355662752888038}
   point: 1
+  clip: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
 --- !u!65 &8052233243100401441
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1786b86d5396c247894d70821bbd2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSilver: {fileID: 8300000, guid: d5d3dc1f2c9f2ba4a954d3679d23fd8b, type: 3}
 --- !u!65 &4351441728391414117
 BoxCollider:
   m_ObjectHideFlags: 0

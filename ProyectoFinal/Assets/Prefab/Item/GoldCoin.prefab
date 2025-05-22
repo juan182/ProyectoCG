@@ -142,3 +142,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fe1a2f8ee8f9a468b07eea670b6f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioGold: {fileID: 8300000, guid: d5d3dc1f2c9f2ba4a954d3679d23fd8b, type: 3}

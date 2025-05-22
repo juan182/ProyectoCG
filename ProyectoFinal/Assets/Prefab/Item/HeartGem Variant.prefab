@@ -116,3 +116,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cantidadDeVida: 2
+  audioHeart: {fileID: 8300000, guid: 0b3ac3bc2be11414193010ccafc09f70, type: 3}
