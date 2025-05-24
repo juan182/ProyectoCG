@@ -30,6 +30,5 @@ public class LoadScenes : MonoBehaviour
     public void CloseGame()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
     }
 }

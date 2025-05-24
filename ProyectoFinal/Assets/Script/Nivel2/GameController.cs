@@ -58,6 +58,9 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
     }
 
     // Update is called once per frame
+    /// <summary>
+    /// Actualiza la cuenta regresiva cada frame y, activa el panel y reinicia la escena al finalizar el tiempo.
+    /// </summary>
     void Update()
     {
         if (cuentaRegresivaActiva)
@@ -79,7 +82,10 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
             }
         }
     }
-
+    /// <summary>
+    /// Actualiza el TextMeshPro de la interfaz con el tiempo restante en segundos.
+    /// </summary>
+    /// <param name="time">Tiempo actual restante.</param>
     void UpdateCountdownUI(float time)
     {
         
@@ -89,7 +95,9 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         cuentaRegresiva.text = string.Format("{00}", seconds);
     }
 
-
+    /// <summary>
+    /// Activa el panel de alerta de tiburón y oculta otros paneles del juego.
+    /// </summary>
     public void AlertaTiburon()
     {
         
@@ -100,6 +108,10 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         PanelTiempo.SetActive(false);
     }
 
+    /// <summary>
+    /// Actualiza el contador de UI con un valor entero determinado.
+    /// </summary>
+    /// <param name="value">Valor a mostrar en el contador.</param>
     public void Contador(int value)
     {
         
