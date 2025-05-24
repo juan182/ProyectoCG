@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Clase serializable que representa los datos guardados de una partida 
+/// del jugador, incluyendo nombre, recolectables, tiempo total jugado y
+/// fecha de guardado.
+/// </summary>
 [System.Serializable]
 public class DatosJugador 
 {

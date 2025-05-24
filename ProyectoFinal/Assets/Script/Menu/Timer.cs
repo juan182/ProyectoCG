@@ -6,6 +6,11 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// Controla un temporizador persistente entre escenas que acumula tiempo
+/// y puede mostrarlo en pantalla al llegar a la escena de puntuación.
+/// </summary>
 public class Timer : MonoBehaviour
 {
     public static Timer Instance;
@@ -17,6 +22,7 @@ public class Timer : MonoBehaviour
     private float startTime;
     private float stopTotalTime;
     private bool isRunning = false;
+
 
     private void Awake()
     {
@@ -34,6 +40,9 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Elimina el listener de cambio de escena al destruir el objeto.
+    /// </summary>
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -42,12 +51,16 @@ public class Timer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //if (!isRunning)
-        //{
-        //    // TimerStart();
-        //}
+
     }
 
+    /// <summary>
+    /// Se ejecuta al cargar una nueva escena. 
+    /// Si es la escena de puntuación, detiene el temporizador y 
+    /// actualiza los textos.
+    /// </summary>
+    /// <param name="scene">Escena cargada.</param>
+    /// <param name="mode">Modo de carga.</param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Score")
@@ -69,6 +82,14 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Inicia el temporizador si no está corriendo.
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// Timer.Instance.TimerStart();
+    /// </code>
+    /// </example>
     public void TimerStart()
     {
         if (!isRunning)
@@ -79,6 +100,9 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detiene el temporizador y acumula el tiempo transcurrido.
+    /// </summary>
     public void TimerStop()
     {
         if (isRunning)
@@ -91,6 +115,9 @@ public class Timer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reinicia el temporizador, eliminando el tiempo acumulado.
+    /// </summary>
     public void TimerReset()
     {
         
@@ -98,32 +125,24 @@ public class Timer : MonoBehaviour
         isRunning = false;
         startTime = 0;
 
-        //if (timerMinutes != null) timerMinutes.text = "00";
-        //if (timerSeconds != null) timerSeconds.text = "00";
-        //if (timerSeconds100 != null) timerSeconds100.text = "00";
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-
-        //if (isRunning)
-        //{
-        //    float currentTime = stopTotalTime + (Time.time - startTime);
-        //    int minutesInt = (int)(currentTime / 60);
-        //    int secondsInt = (int)(currentTime % 60);
-        //    int seconds100Int = (int)((currentTime - (minutesInt * 60 + secondsInt)) * 100);
-
-        //    //if (timerMinutes != null) timerMinutes.text = minutesInt.ToString("00");
-        //    //if (timerSeconds != null) timerSeconds.text = secondsInt.ToString("00");
-        //    //if (timerSeconds100 != null) timerSeconds100.text = seconds100Int.ToString("00");
-
-
-        //}
     }
 
+    /// <summary>
+    /// Devuelve el tiempo transcurrido en formato mm:ss:cc 
+    /// (minutos, segundos, centésimas).
+    /// </summary>
+    /// <returns>Cadena con el tiempo transcurrido formateado.</returns>
+    /// <example>
+    /// <code>
+    /// string tiempo = Timer.Instance.GetElapsedTime(); // "01:23:45"
+    /// </code>
+    /// </example>
     public string GetElapsedTime()
     {
         float currentTime = isRunning ? stopTotalTime + (Time.time - startTime) : stopTotalTime;
@@ -133,6 +152,10 @@ public class Timer : MonoBehaviour
         return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, seconds100);
     }
 
+    /// <summary>
+    /// Devuelve el tiempo transcurrido como un número decimal (segundos).
+    /// </summary>
+    /// <returns>Tiempo total en segundos¿.</returns>
     public float GetElapsedTimeRaw()
     {
         return isRunning ? stopTotalTime + (Time.time - startTime) : stopTotalTime;

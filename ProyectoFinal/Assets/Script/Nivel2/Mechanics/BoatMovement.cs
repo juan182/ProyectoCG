@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class BoatMovement : MonoBehaviour
 {
+    /// <summary>
+    /// Velocidad para mover el bote hacia adelante o atrás.
+    /// </summary>
     public float velocidad = 600f;
+
+    /// <summary>
+    /// Velocidad para girar el bote (en grados por segundo).
+    /// </summary>
     public float giroVelocidad = 50f;
     private Rigidbody rb;
     private bool puedeMoverse = true;
 
     private RigidbodyConstraints restriccionesOriginales;
     // Start is called before the first frame update
+
+    /// <summary>
+    /// Inicializa el Rigidbody, ajusta el centro de masa 
+    /// y guarda las restricciones originales.
+    /// </summary>
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,6 +36,10 @@ public class BoatMovement : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Aplica la fuerza y rotación al bote en cada 
+    /// FixedUpdate si puede moverse.
+    /// </summary>
     private void FixedUpdate()
     {
         if (!puedeMoverse) return;
@@ -48,6 +64,17 @@ public class BoatMovement : MonoBehaviour
         rb.MoveRotation(rb.rotation * rotacion);
     }
 
+
+    /// <summary>
+    /// Activa o desactiva el movimiento del bote.
+    /// </summary>
+    /// <param name="estado">true para activar el movimiento, false para detenerlo.</param>
+    /// <example>
+    /// <code>
+    /// boatMovement.ActivarMovimiento(false); // Detiene el bote
+    /// boatMovement.ActivarMovimiento(true);  // Lo activa
+    /// </code>
+    /// </example>
     public void ActivarMovimiento(bool estado)
     {
         puedeMoverse = estado;
@@ -59,12 +86,20 @@ public class BoatMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Congela la inclinación del bote para evitar que se 
+    /// vuelque o se incline en X y Z.
+    /// </summary>
+
     public void CongelarInclinacion()
     {
         rb.constraints = (restriccionesOriginales | RigidbodyConstraints.FreezeRotationZ |
             RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY);
     }
 
+    /// <summary>
+    /// Restaura las restricciones originales del Rigidbody.
+    /// </summary>
     public void RestaurarInclinacion()
     {
         rb.constraints = restriccionesOriginales;

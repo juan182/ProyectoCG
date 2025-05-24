@@ -13,6 +13,10 @@ public class CoinScript : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    /// <summary>
+    /// Rota el objeto alrededor de un eje definido a una velocidad constante.
+    /// </summary>
     void Update()
     {
         transform.Rotate(ejeRotacion, velocidadRotacion * Time.deltaTime);

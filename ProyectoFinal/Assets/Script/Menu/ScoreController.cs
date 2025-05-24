@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Controla la interfaz de resumen del juego, 
+/// mostrando estadísticas como objetos recolectados,
+/// tiempos por escena y permite al jugador ingresar su nombre.
+/// </summary>
 public class ScoreController : MonoBehaviour
 {
     [SerializeField]
@@ -63,6 +69,7 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI milEscena3;
     #endregion
 
+    // Diccionario que asocia cada escena con sus campos de texto en UI
     private Dictionary<string, (TextMeshProUGUI min, TextMeshProUGUI seg, TextMeshProUGUI mil)> uiPorEscena;
 
     #region Usuario
@@ -70,6 +77,10 @@ public class ScoreController : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
+
+    /// <summary>
+    /// Inicializa los paneles, muestra datos recolectados y tiempos.
+    /// </summary>
     void Start()
     {
         PanelNombre.SetActive(true);
@@ -92,23 +103,42 @@ public class ScoreController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Actualiza el texto de las monedas de cobre.
+    /// </summary>
     public void ShowCopperCoins()
     {
         CopperCoins.text = GameManager.Instance.copper.ToString();
     }
+
+    /// <summary>
+    /// Actualiza el texto de las monedas de plata.
+    /// </summary>
     public void ShowSilverCoins()
     {
         SilverCoins.text = GameManager.Instance.silver.ToString();
     }
+
+    /// <summary>
+    /// Actualiza el texto de las monedas de oro.
+    /// </summary>
     public void ShowGoldCoins()
     {
         GoldCoins.text = GameManager.Instance.gold.ToString();
     }
+
+    /// <summary>
+    /// Actualiza el texto de los ataques de tiburones.
+    /// </summary>
     public void ShowSharks()
     {
         Sharks.text = GameManager.Instance.shark.ToString();
     }
 
+    /// <summary>
+    /// Muestra el resumen si el campo de nombre esta lleno, si esta vacio, 
+    /// lanza advertencia.
+    /// </summary>
     public void VerResumen()
     {
         nombreUsuario = InputFieldNombre.text.Trim();
@@ -129,6 +159,10 @@ public class ScoreController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Muestra el panel de detalles donde se ve el tiempo transcurrido
+    /// en cada escena.
+    /// </summary>
     public void VerDetalles()
     {
         PanelNombre.SetActive(false);
@@ -136,6 +170,9 @@ public class ScoreController : MonoBehaviour
         PanelDetalles.SetActive(true);
     }
 
+    /// <summary>
+    /// Asocia los campos de texto con sus respectivas escenas.
+    /// </summary>
     void ConfigurarUI()
     {
         // Mapea la UI de cada escena
@@ -147,6 +184,9 @@ public class ScoreController : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Muestra el tiempo invertido en cada escena, y el total.
+    /// </summary>
     void MostrarTiemposPorEscena()
     {
         Debug.Log("Tiempos guardados en GameManager:");
@@ -222,16 +262,21 @@ public class ScoreController : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Cierra completamente el juego (solo funciona en compilado).
+    /// </summary>
     public void CloseGame()
     {
         Application.Quit();
     }
-
+    /// <summary>
+    /// Carga una escena (en este caso, va al menú principal).
+    /// </summary>
+    /// <param name="nameScene">Nombre de la escena a cargar.</param>
     public void LoadScene(string nameScene)
     {
 
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(nameScene);
 
     }
 

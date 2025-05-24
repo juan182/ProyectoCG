@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Gira el objeto constantemente sobre un eje con una velocidad definida.
+/// </summary>
 public class RotationScript : MonoBehaviour
 {
     public float velocidadRotacion = 50f; // Velocidad de rotación en grados por segundo

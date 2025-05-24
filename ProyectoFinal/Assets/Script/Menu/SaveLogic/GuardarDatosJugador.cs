@@ -4,6 +4,11 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Clase encargada de guardar y cargar los datos del jugador en un archivo JSON.
+/// Maneja la serialización y deserialización de un historial de partidas, 
+/// mostrando los datos guardados en la UI.
+/// </summary>
 public class GuardarDatosJugador : MonoBehaviour
 {
 
@@ -19,6 +24,11 @@ public class GuardarDatosJugador : MonoBehaviour
 
     Historial historial = new Historial();
 
+
+    /// <summary>
+    /// Inicializa la ruta del archivo JSON y carga los datos guardados si 
+    /// existen.
+    /// </summary>
     private void Awake()
     {
         rutaArchivo = Path.Combine(Application.persistentDataPath, "datosJugador.json");
@@ -33,6 +43,10 @@ public class GuardarDatosJugador : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Crea un nuevo registro con los datos actuales del jugador y los 
+    /// guarda en un archivo JSON.
+    /// </summary>
     public void GuardarDatos()
     {
         DatosJugador datos = new DatosJugador();
@@ -54,7 +68,11 @@ public class GuardarDatosJugador : MonoBehaviour
         Debug.Log("Datos guardados en: " + rutaArchivo);
     }
 
-    
+
+    /// <summary>
+    /// Carga los datos guardados desde el archivo JSON y los muestra en 
+    /// la interfaz de usuario.
+    /// </summary>
     public void CargarDatos()
     {
         PanelDatosCargados.SetActive(true);
@@ -101,6 +119,11 @@ public class GuardarDatosJugador : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Convierte un tiempo en segundos a un formato de texto HH:mm:ss.
+    /// </summary>
+    /// <param name="segundos">Tiempo en segundos.</param>
     string FormatearTiempo(float segundos)
     {
         int horas = (int)(segundos / 3600);
