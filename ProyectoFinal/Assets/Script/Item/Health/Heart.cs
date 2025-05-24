@@ -2,11 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Heart : MonoBehaviour
 {
+    /// <summary>
+    /// Vida que otorga al jugador.
+    /// </summary>
     public int cantidadDeVida = 2;
+
+    /// <summary>
+    /// Sonido al recolectar el corazón.
+    /// </summary>
     public AudioClip audioHeart;
 
+    /// <summary>
+    /// Cura al jugador, actualiza el GameManager y destruye el objeto.
+    /// </summary>
+    /// <param name="other">Collider que entra en contacto.</param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

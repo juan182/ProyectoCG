@@ -20,6 +20,19 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Aumenta la vida actual del jugador sin superar el máximo.
+    /// También actualiza la vida almacenada en el GameManager.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de vida a restaurar.</param>
+    /// <example>
+    /// Por ejemplo:
+    /// <code>
+    /// PlayerHealth salud = GetComponent<PlayerHealth>();
+    /// salud.Curar(2);
+    /// </code>
+    /// Esto aumentará la vida del jugador en 2 unidades, sin exceder la vida máxima.
+    /// </example>
     public void Curar(int cantidad)
     {
         vidaActual += cantidad;
@@ -28,6 +41,21 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Vida actual: " + vidaActual);
     }
 
+
+    /// <summary>
+    /// Resta vida al jugador y verifica si debe morir.
+    /// También actualiza la vida en el GameManager.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de daño recibido.</param>
+    /// <example>
+    /// Por ejemplo:
+    /// <code>
+    /// PlayerHealth salud = GetComponent<PlayerHealth>();
+    /// salud.RecibirDaño(3);
+    /// </code>
+    /// Esto reducirá la vida actual del jugador en 3 unidades. 
+    /// Si la vida llega a cero, el jugador morirá y se reiniciará la escena.
+    /// </example>
     public void RecibirDaño(int cantidad)
     {
         vidaActual -= cantidad;
@@ -38,6 +66,14 @@ public class PlayerHealth : MonoBehaviour
             Morir();
         }
     }
+
+    /// <summary>
+    /// Reinicia la escena actual cuando el jugador muere.
+    /// </summary>
+    /// <example>
+    /// Este método es llamado internamente cuando la vida del 
+    /// jugador es menor o igual a 0.
+    /// </example>
     void Morir()
     {
         Debug.Log("El jugador ha muerto.");

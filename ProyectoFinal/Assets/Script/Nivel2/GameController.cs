@@ -6,6 +6,10 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Controlador principal para la escena 2, encargado de iniciar el temporizador y guardar el tiempo transcurrido
+/// en la escena por el jugador.
+/// </summary>
 public class GameController : MonoBehaviour, InterfaceTiempoEscena
 {
     [SerializeField]
@@ -83,7 +87,8 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         }
     }
     /// <summary>
-    /// Actualiza el TextMeshPro de la interfaz con el tiempo restante en segundos.
+    /// Actualiza el TextMeshPro cuentaRegresiva de la interfaz 
+    /// con el tiempo restante en segundos.
     /// </summary>
     /// <param name="time">Tiempo actual restante.</param>
     void UpdateCountdownUI(float time)
@@ -118,12 +123,20 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         conteo.text =value.ToString();
     }
 
+    /// <summary>
+    /// Muestra en la UI el número de tiburones atrapados usando 
+    /// el contador del GameManager.
+    /// </summary>
     public void TiburonConteo()
     {
         //tiburonConteo++;
         tiburones.text = GameManager.Instance.shark.ToString();
     }
 
+    /// <summary>
+    /// Activa el panel del minijuego y comienza la persecución del tiburón.
+    /// </summary>
+    /// <param name="tiburon">Referencia al tiburón que está atacando.</param>
     public void MiniJuego(SharkPatrol tiburon)
     {
         if (minijuegoActivo) return;
@@ -140,7 +153,12 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
             scriptMJ.InicioMiniJuego();
     }
 
-
+    /// <summary>
+    /// Finaliza el minijuego de escape. Muestra la UI de éxito o 
+    /// fracaso y reinicia los comportamientos del tiburón.
+    /// </summary>
+    /// <param name="exito">Verdadero si el jugador escapó, falso 
+    /// si falló.</param>
     public void TerminarEscape(bool exito)
     {
         if (!minijuegoActivo) return;
@@ -169,6 +187,9 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
             sharkManager.ReanudarAtaqueYPatrulla();
     }
 
+    /// <summary>
+    /// Oculta todos los paneles relacionados con el ataque del tiburón.
+    /// </summary>
     public void SalirAtaque()
     {
         PanelPerdiste.SetActive(false);
@@ -178,6 +199,9 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         PanelTiempo.SetActive(false);
     }
 
+    /// <summary>
+    /// Muestra el panel de derrota y reinicia la escena.
+    /// </summary>
     public void PerdisteUI()
     {
         PanelPerdiste.SetActive(true);
@@ -189,6 +213,10 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         ReiniciarEscena();
     }
 
+    /// <summary>
+    /// Muestra el panel de victoria y lo oculta automáticamente 
+    /// después de un tiempo.
+    /// </summary>
     public void GanasteUI()
     {
         PanelPerdiste.SetActive(false);
@@ -201,17 +229,28 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
     }
 
 
-
+    /// <summary>
+    /// Espera unos segundos y luego desactiva un panel en específico.
+    /// </summary>
+    /// <param name="panel">Panel que se quiere ocultar.</param>
+    /// <param name="segundos">Tiempo de espera antes de ocultar el 
+    /// panel.</param>
     private IEnumerator DesactivarPanel(GameObject panel, float segundos)
     {
         yield return new WaitForSeconds(segundos);
         panel.SetActive(false);
     }
 
+    /// <summary>
+    /// Reinicia la escena actual tras una breve espera.
+    /// </summary>
+    /// <param name="delay">Espera 2 segundos antes de reinciar la 
+    /// escena.</param>
     public void ReiniciarEscena(float delay = 2f)
     {
         StartCoroutine(Reiniciar(delay));
     }
+
 
     private IEnumerator Reiniciar(float segundos)
     {
@@ -220,6 +259,10 @@ public class GameController : MonoBehaviour, InterfaceTiempoEscena
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    /// <summary>
+    /// Detiene el temporizador de la escena 2, guarda el tiempo 
+    /// en el GameManager y reinicia el cronómetro.
+    /// </summary>
     public void GuardarTiempoEscena()
     {
         Timer.Instance.TimerStop();

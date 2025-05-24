@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+
+/// <summary>
+/// Controla el movimiento, rotación, animación, salto y colisiones del jugador en el Nivel 3.
+/// </summary>
+/// <example>
+/// <code>
+/// // Debe estar en un objeto con CharacterController.
+/// // Usa un hijo con Animator para animaciones.
+/// </code>
+/// </example>
 public class Nivel3MovePlayer : MonoBehaviour
 {
     private CharacterController conn;
@@ -105,6 +115,9 @@ public class Nivel3MovePlayer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Devuelve al jugador a su posición inicial.
+    /// </summary>
     public void ResetPlayerPosition()
     {
         transform.position = initialPosition;
@@ -112,6 +125,10 @@ public class Nivel3MovePlayer : MonoBehaviour
 
     public float threshold;
 
+    /// <summary>
+    /// Restaura la posición del jugador y reinicia 
+    /// la salud si se queda sin vida.
+    /// </summary>
     public void hit()
     {
         health = health - 1;
