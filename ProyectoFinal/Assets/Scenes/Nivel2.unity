@@ -3009,6 +3009,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 601911992518909484, guid: ca3aee15d778b1848876976849442c5c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3460752536809392356, guid: ca3aee15d778b1848876976849442c5c,
         type: 3}
       propertyPath: m_IsActive
@@ -16116,6 +16121,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4279408055
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936154993991518172, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936154993991518172, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936154993991518172, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 11363
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936154993991518172, guid: 3919833438e1a3f4cbdffbff6f3819ac,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1356
       objectReference: {fileID: 0}
     - target: {fileID: 4285146033556223200, guid: 3919833438e1a3f4cbdffbff6f3819ac,
         type: 3}

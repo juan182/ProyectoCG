@@ -226,7 +226,6 @@ public class ScoreController : MonoBehaviour
     public void CloseGame()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void LoadScene(string nameScene)
